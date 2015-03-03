@@ -71,19 +71,20 @@ $(document).ready(function(){
 		        var l = hsl[2];
 
 
-		        if(s > 0.5 && l > .35 && l < .6) {
+            
+            if(s > 0.5 && l > .35 && l < .6) {
 		        	if(s > keeps || l > keepl) {
 		        		keeps = s;
 		        		keepl = l;
 		        		keeph = h;
 		        	}
 		        }
-
-
 		   }
 		   var rgb = hslToRgb(keeph, keeps, keepl);
 			//$('#image').css('background-image', 'url('+canvas.toDataURL("image/png")+')');
-			$('#block').css('background-color', 'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')');
+      var textcol = getContrastYIQ(rgbToHex(rgb[0], rgb[1], rgb[2]));
+      console.log(textcol);
+      $('#block').css('background-color', 'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')').css('color', textcol);
 		}
 		var img = document.getElementById('image');
 		var style = img.currentStyle || window.getComputedStyle(img, false);
@@ -162,6 +163,23 @@ function hslToRgb(h, s, l){
     }
 
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+function getContrast50(hexcolor){
+    return (parseInt(hexcolor, 16) > 0xffffff/2) ? 'black':'white';
+}
+function getContrastYIQ(hexcolor){
+  var r = parseInt(hexcolor.substr(0,2),16);
+  var g = parseInt(hexcolor.substr(2,2),16);
+  var b = parseInt(hexcolor.substr(4,2),16);
+  var yiq = ((r*299)+(g*587)+(b*114))/1000;
+  return (yiq >= 128) ? 'black' : 'white';
+}
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+function rgbToHex(r, g, b) {
+    return componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 </script>
 <a href="index2.html">Another Image</a>
