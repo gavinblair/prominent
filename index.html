@@ -28,7 +28,7 @@
   z-index: 2;
 }
 #block {
-  background: #000;
+  background: #fff;
   color: #fff;
   height: 200px;
   width: 200px;
@@ -43,7 +43,7 @@ $(document).ready(function(){
 	var num = 0;
 
 	$('a').click(function(){
-		num++; if(num > 10) num = 1;
+		num++; if(num > 11) num = 1;
 		$('#image').css('background-image', 'url('+num+'.jpg)');
 		canvas = document.createElement('canvas'),
 		ctx = canvas.getContext('2d'),
@@ -59,7 +59,7 @@ $(document).ready(function(){
 		    var keeph = 0;
 		    var keeps = 0;
 		    var keepl = 0;
-		    for (var i = 0; i < 5000 /*data.length*/; i += 4) {
+		    for (var i = 0; i < data.length; i += 4) {
 				
 		        var red = data[i],
 		            green = data[i + 1],
