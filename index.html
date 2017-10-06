@@ -88,7 +88,7 @@ $(document).ready(function(){
 		}
 		var img = document.getElementById('image');
 		var style = img.currentStyle || window.getComputedStyle(img, false);
-		image.src = style.backgroundImage.slice(4, -1);
+		image.src = style.backgroundImage.slice(5, -2);
 
 		return false;
 	}).click();
